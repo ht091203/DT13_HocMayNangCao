@@ -1,0 +1,66 @@
+{
+    "sensitivity": {
+        "3.0": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.202,
+            "hop_count_std": 0.11408768557561329,
+            "congestion_hits_mean": 0.9589999999999999,
+            "congestion_hits_std": 0.0587281874401041,
+            "invalid_action_rate_mean": 0.0,
+            "invalid_action_rate_std": 0.0
+        },
+        "5.0": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.289,
+            "hop_count_std": 0.15371727293964066,
+            "congestion_hits_mean": 0.843,
+            "congestion_hits_std": 0.0681248853210044,
+            "invalid_action_rate_mean": 0.0,
+            "invalid_action_rate_std": 0.0
+        },
+        "7.0": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.2870000000000004,
+            "hop_count_std": 0.11126994203287785,
+            "congestion_hits_mean": 0.819,
+            "congestion_hits_std": 0.06472248450113761,
+            "invalid_action_rate_mean": 0.0,
+            "invalid_action_rate_std": 0.0
+        }
+    },
+    "ablation": {
+        "q_learning_with_mask": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.282,
+            "hop_count_std": 0.10768472500777443,
+            "congestion_hits_mean": 0.8960000000000001,
+            "congestion_hits_std": 0.09562426470305538,
+            "invalid_action_rate_mean": 0.0,
+            "invalid_action_rate_std": 0.0
+        },
+        "q_learning_no_mask": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.211,
+            "hop_count_std": 0.0945991543302581,
+            "congestion_hits_mean": 0.851,
+            "congestion_hits_std": 0.09533624704172071,
+            "invalid_action_rate_mean": 0.6810085446548537,
+            "invalid_action_rate_std": 0.3643119570640787
+        },
+        "double_q_with_mask": {
+            "delivery_rate_mean": 100.0,
+            "delivery_rate_std": 0.0,
+            "hop_count_mean": 2.457,
+            "hop_count_std": 0.127753669223236,
+            "congestion_hits_mean": 0.85,
+            "congestion_hits_std": 0.05310367218940701,
+            "invalid_action_rate_mean": 0.0,
+            "invalid_action_rate_std": 0.0
+        }
+    }
+}

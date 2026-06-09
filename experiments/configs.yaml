@@ -1,0 +1,11 @@
+# Hyperparameters for training and evaluation
+alpha: 0.1
+gamma: 0.95
+epsilon_start: 1.0
+epsilon_end: 0.05
+epsilon_decay_steps: 4000
+episodes: 5000
+max_hops: 30
+seed: 42
+save_path_q: "experiments/q_table.npy"
+save_path_double_q: "experiments/double_q_table.npz"

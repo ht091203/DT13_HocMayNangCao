@@ -1,0 +1,62 @@
+{
+    "random": {
+        "delivery_rates_mean": 87.9,
+        "delivery_rates_std": 2.2561028345356955,
+        "hop_counts_mean": 11.913,
+        "hop_counts_std": 0.8499299971174096,
+        "congestion_costs_mean": 28.155,
+        "congestion_costs_std": 2.1871728326769238,
+        "timeout_rates_mean": 12.1,
+        "timeout_rates_std": 2.256102834535696,
+        "invalid_action_rates_mean": 0.0,
+        "invalid_action_rates_std": 0.0
+    },
+    "shortest_path": {
+        "delivery_rates_mean": 100.0,
+        "delivery_rates_std": 0.0,
+        "hop_counts_mean": 2.1019999999999994,
+        "hop_counts_std": 0.08022468448052637,
+        "congestion_costs_mean": 5.275,
+        "congestion_costs_std": 0.3982775414205527,
+        "timeout_rates_mean": 0.0,
+        "timeout_rates_std": 0.0,
+        "invalid_action_rates_mean": 0.0,
+        "invalid_action_rates_std": 0.0
+    },
+    "congestion_aware": {
+        "delivery_rates_mean": 100.0,
+        "delivery_rates_std": 0.0,
+        "hop_counts_mean": 2.543,
+        "hop_counts_std": 0.18374166647769363,
+        "congestion_costs_mean": 4.194999999999999,
+        "congestion_costs_std": 0.3312476415010378,
+        "timeout_rates_mean": 0.0,
+        "timeout_rates_std": 0.0,
+        "invalid_action_rates_mean": 0.0,
+        "invalid_action_rates_std": 0.0
+    },
+    "q_learning": {
+        "delivery_rates_mean": 100.0,
+        "delivery_rates_std": 0.0,
+        "hop_counts_mean": 2.262,
+        "hop_counts_std": 0.11329607230614833,
+        "congestion_costs_mean": 4.3950000000000005,
+        "congestion_costs_std": 0.34960692212826694,
+        "timeout_rates_mean": 0.0,
+        "timeout_rates_std": 0.0,
+        "invalid_action_rates_mean": 0.0,
+        "invalid_action_rates_std": 0.0
+    },
+    "double_q": {
+        "delivery_rates_mean": 100.0,
+        "delivery_rates_std": 0.0,
+        "hop_counts_mean": 2.194,
+        "hop_counts_std": 0.08581375181169976,
+        "congestion_costs_mean": 4.23,
+        "congestion_costs_std": 0.42848570571257105,
+        "timeout_rates_mean": 0.0,
+        "timeout_rates_std": 0.0,
+        "invalid_action_rates_mean": 0.0,
+        "invalid_action_rates_std": 0.0
+    }
+}
