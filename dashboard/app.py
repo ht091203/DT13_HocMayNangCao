@@ -405,13 +405,12 @@ with tab_results:
             import matplotlib.pyplot as _plt
             _plt.close(fig_hc)
 
-        # Summary table
+        # Summary table — dùng st.markdown HTML để tránh lỗi pandas Styler
         st.subheader("Bảng tóm tắt")
         try:
             with open(EVAL_PATH) as f:
                 results = json.load(f)
 
-            rows = []
             agent_order = ["random", "shortest_path", "congestion_aware", "q_learning", "double_q"]
             agent_display = {
                 "random": "Random",
@@ -420,36 +419,53 @@ with tab_results:
                 "q_learning": "Q-Learning",
                 "double_q": "Double Q-Learning",
             }
+
+            html = """
+<style>
+.result-table {width:100%;border-collapse:collapse;font-size:14px;}
+.result-table th {background:#2c3e50;color:white;padding:8px 12px;text-align:left;}
+.result-table td {padding:7px 12px;border-bottom:1px solid #ddd;}
+.result-table tr:hover td {background:#f5f5f5;}
+.highlight-green {background:#b6f5b6;color:#1a5c1a;font-weight:bold;}
+.badge-pass {background:#27ae60;color:white;border-radius:4px;padding:2px 6px;font-size:12px;}
+.badge-fail {background:#e74c3c;color:white;border-radius:4px;padding:2px 6px;font-size:12px;}
+</style>
+<table class="result-table">
+<tr>
+  <th>Agent</th>
+  <th>Delivery Rate (%)</th>
+  <th>Avg Hop Count</th>
+  <th>Congestion Cost</th>
+  <th>Timeout Rate (%)</th>
+</tr>
+"""
             for a in agent_order:
                 if a not in results:
                     continue
                 r = results[a]
-                rows.append({
-                    "Agent": agent_display[a],
-                    "Delivery Rate": f"{r.get('delivery_rates_mean', 0):.1f}% ± {r.get('delivery_rates_std', 0):.1f}",
-                    "Avg Hop Count": f"{r.get('hop_counts_mean', 0):.2f} ± {r.get('hop_counts_std', 0):.2f}",
-                    "Congestion Cost": f"{r.get('congestion_costs_mean', 0):.2f} ± {r.get('congestion_costs_std', 0):.2f}",
-                    "_dr_mean": r.get("delivery_rates_mean", 0),
-                    "_agent": a,
-                })
+                dr_mean = r.get("delivery_rates_mean", 0)
+                dr_std  = r.get("delivery_rates_std", 0)
+                hc_mean = r.get("hop_counts_mean", 0)
+                hc_std  = r.get("hop_counts_std", 0)
+                cc_mean = r.get("congestion_costs_mean", 0)
+                cc_std  = r.get("congestion_costs_std", 0)
+                to_mean = r.get("timeout_rates_mean", 0)
+                to_std  = r.get("timeout_rates_std", 0)
 
-            df = pd.DataFrame(rows)
+                is_rl = a in ("q_learning", "double_q")
+                dr_class = "highlight-green" if (is_rl and dr_mean >= 85) else ""
+                badge = '<span class="badge-pass">✅ ≥85%</span>' if (is_rl and dr_mean >= 85) else ""
 
-            # Color delivery rate for RL agents >= 85%
-            def highlight_dr(row):
-                styles = [""] * len(row)
-                if row["_agent"] in ("q_learning", "double_q") and row["_dr_mean"] >= 85:
-                    dr_idx = df.columns.get_loc("Delivery Rate")
-                    styles[dr_idx] = "background-color: #b6f5b6; color: #1a5c1a; font-weight: bold"
-                return styles
+                html += f"""<tr>
+  <td><b>{agent_display[a]}</b></td>
+  <td class="{dr_class}">{dr_mean:.1f} ± {dr_std:.1f} {badge}</td>
+  <td>{hc_mean:.2f} ± {hc_std:.2f}</td>
+  <td>{cc_mean:.2f} ± {cc_std:.2f}</td>
+  <td>{to_mean:.1f} ± {to_std:.1f}</td>
+</tr>"""
 
-            display_cols = ["Agent", "Delivery Rate", "Avg Hop Count", "Congestion Cost"]
-            styled = df[display_cols + ["_dr_mean", "_agent"]].style.apply(highlight_dr, axis=1)
-            st.dataframe(styled, use_container_width=True, hide_index=True,
-                         column_config={
-                             "_dr_mean": None,   # hide helper columns
-                             "_agent": None,
-                         })
+            html += "</table>"
+            st.markdown(html, unsafe_allow_html=True)
 
         except Exception as e:
             st.error(f"Lỗi đọc eval_results.json: {e}")
